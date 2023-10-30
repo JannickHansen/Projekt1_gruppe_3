@@ -19,7 +19,8 @@ import java.util.Scanner;
                 System.out.println("2. Revision");
                 System.out.println("3. Søg efter fornavn");
                 System.out.println("4. Søg efter aftaleID");
-                System.out.println("5. Fjern aftale");
+                System.out.println("5. Print alle aftaler");
+                System.out.println("6. Fjern aftale");
                 System.out.println("Tast 9 for at afslutte");
 
                 try {
@@ -44,7 +45,7 @@ import java.util.Scanner;
                             System.out.println("Søg efter fornavn. \n");
                             op2 = menutast.next();
                             for (Aftale aftale : startCalender.findSpecificAftaleByName(startCalender.aftaleListe, op2)) {
-                                System.out.println(aftale + "\n");
+                                System.out.println("\nDato: "+aftale.dato+"\nTidspunkt: "+aftale.tidspunkt+"\nKundenavn: "+aftale.kundenavn+"\nAftale nr: "+aftale.aftaleID+"\n");
                             }
                             break;
 
@@ -59,7 +60,7 @@ import java.util.Scanner;
                             startCalender.aftaleListe.sort(Comparator.comparing(aftale -> aftale.dato));
                             System.out.println("Alle aftaler efter dato:");
                             for (Aftale aftale : startCalender.aftaleListe) {
-                                System.out.println(aftale + "\n");
+                                System.out.println("\nDato: "+aftale.dato+"\nTidspunkt: "+aftale.tidspunkt+"\nKundenavn: "+aftale.kundenavn+"\nAftale nr: "+aftale.aftaleID+"\n");
                             }
                             break;
                         case 6:
