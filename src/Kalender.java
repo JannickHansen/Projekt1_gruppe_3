@@ -104,14 +104,14 @@ class Kalender {
                                         }
                                     }
                                     break;
-                                } else if (ferie == 'n') {
+                                } else if (ferie == 'n' || ferie == 'N') {
                                     break;
                                 } else {
                                     System.out.println("Du kan enten taste y eller n");
                                 }
                             }
                         }
-                        if (ferie=='y' || !isFerieEqualsAftale(valgtDato)){
+                        if (ferie=='y' || ferie=='Y' || !isFerieEqualsAftale(valgtDato)){
                             ferieDage.add(valgtDato);
                             System.out.println(valgtDato + " er nu lukket");
                             break;
