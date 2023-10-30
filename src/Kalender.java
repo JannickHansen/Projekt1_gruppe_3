@@ -75,13 +75,12 @@ class Kalender {
                 System.out.println("Indtast lukkedatoen (åååå-mm-dd): ");
                 System.out.println("Tryk 0 for at gå tilbage ");
                 boolean gyldigDato = false;
+                char ferie=' ';
                 while (!gyldigDato) {
                     String datoInput = tastatur.nextLine();
-
                     try {
                         if (datoInput.equals("0"))
                             break;
-
                         LocalDate valgtDato = LocalDate.parse(datoInput);
                         if (ferieDage.contains(valgtDato)){
                             System.out.println("Dato er allerede lukket ");
@@ -89,14 +88,38 @@ class Kalender {
                             System.out.println("Eller tryk 0 for at gå tilbage ");
                             continue;
                         }
-                        ferieDage.add(valgtDato);
-                        System.out.println(valgtDato+" er nu lukket");
-                        break;
+                        if (isFerieEqualsAftale(valgtDato)) {
+                            System.out.println("denne dag har allerede aftaler booket");
+                            System.out.println("vil du stadig lukke dato? y/n");
+                            while (true) {
+                                ferie = tastatur.next().charAt(0);
+                                tastatur.nextLine();
+                                if (ferie == 'y') {
+                                    Iterator<Aftale> iterator = aftaleListe.iterator();
+                                    while (iterator.hasNext()) {
+                                        Aftale aftale = iterator.next();
+                                        if (aftale.dato.isEqual(valgtDato)) {
+                                            System.out.println("Denne aftaler er nu fjernet: \n"+aftale);
+                                            iterator.remove();
+                                        }
+                                    }
+                                    break;
+                                } else if (ferie == 'n') {
+                                    break;
+                                } else {
+                                    System.out.println("Du kan enten taste y eller n");
+                                }
+                            }
+                        }
+                        if (ferie=='y' || !isFerieEqualsAftale(valgtDato)){
+                            ferieDage.add(valgtDato);
+                            System.out.println(valgtDato + " er nu lukket");
+                            break;
+                        }
 
                     } catch (Exception e) {
-                        System.out.println("Ugyldigt datoformat. Brug formatet ååå-mm-dd.");
+                        System.out.println("Ugyldigt datoformat. Brug formatet åååå-mm-dd.");
                     }
-
                 }
             } else if (op1 > 53) {
                 System.out.println("\nDer er højest 53 uger på et år. Vælg venligst en gyldig uge.\n");
@@ -117,6 +140,15 @@ class Kalender {
                 }
             }
         }
+    }
+    private boolean isFerieEqualsAftale(LocalDate date) {
+        boolean ferieLukket = false;
+        for (Aftale aftale : aftaleListe) {
+            if (aftale.dato.isEqual(date)) {
+                ferieLukket = true;
+            }
+        }
+        return ferieLukket;
     }
 
     void opretAftale(List<LocalDate> selectedWeek) {
