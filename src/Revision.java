@@ -20,12 +20,15 @@ public class Revision {
     }
 
     void hovedmenu() {
+        int op1 = 9;
         while (true) {
             System.out.println("0. For afslut");
             System.out.println("1. For at søge på dato");
             System.out.println("2. For at søge på aftaleID");
             System.out.println("3. For at søge efter navn");
-            int op1 = scanner.nextInt();
+            System.out.println("4. For at registrere betaling");
+            System.out.println("5. For at redigere betaling");
+            op1 = scanner.nextInt();
             if (op1 == 0) break;
             switch (op1) {
                 case 1:
@@ -42,7 +45,15 @@ public class Revision {
                     findSpecificAftaleByName(test1.aftaleListe, søgEfterNavn);
                     break;
                 case 4:
-                    System.out.println("Enes was here");
+                    System.out.println("Indtast aftale-ID: ");
+                    søgeAftaleID = scanner.nextInt();
+                    registrerBetaling(findSpecificAftaleByAftaleID(test1.aftaleListe, søgeAftaleID));
+                    break;
+                case 5:
+                    System.out.println("Indtast aftle-ID: ");
+                    søgeAftaleID = scanner.nextInt();
+                    redigerBetaling(findSpecificAftaleByAftaleID(test1.aftaleListe, søgeAftaleID));
+                    break;
             }
         }
     }
@@ -106,6 +117,61 @@ public class Revision {
             }
         }
     }
+    void redigerBetaling (Aftale fundetAftale){
+        System.out.println("Fundet aftale: " + fundetAftale + "\n");
+        System.out.println("Vil du redigere denne aftale? (Ja/Nej)");
+        String jaEllerNej = scanner.next();
+        if (jaEllerNej.equalsIgnoreCase("Ja")){
+            System.out.println("Vil du ændre betalingsmetode? (Ja/Nej) ");
+            String editPayment = scanner.next();
+            if (editPayment.equalsIgnoreCase("Ja")) {
+                System.out.println("Vælg betalingsmetode: ");
+                System.out.println("1. Kontant ");
+                System.out.println("2. MobilePay ");
+                System.out.println("3. Kort ");
+                System.out.println("4. Ubetalt ");
+                int op1 = scanner.nextInt();
+                switch (op1) {
+                    case 1:
+                        fundetAftale.betalingsmetode = "Kontant";
+                        break;
+                    case 2:
+                        fundetAftale.betalingsmetode = "MobilePay";
+                        break;
+                    case 3:
+                        fundetAftale.betalingsmetode = "Kort";
+                        break;
+                    case 4:
+                        fundetAftale.betalingsmetode = "Ubetalt";
+                        break;
+                    default:
+                        System.out.println("Ugyldigt input.");
+                        break;
+                }
+            }
+            System.out.println("Vil du ændre betalingsbeløb? (Ja/Nej)");
+            String editPaymentAmount = scanner.next();
+            if (editPaymentAmount.equalsIgnoreCase("Ja")) {
+                System.out.println("Indtast nyt betalingsbeløb: ");
+                double newPaymentAmount = scanner.nextDouble();
+                fundetAftale.totalBelob = newPaymentAmount;
+            }
+
+            System.out.println("Er betalingen gennemførst? (Ja/Nej)");
+            String paymentStatus = scanner.next();
+            if (paymentStatus.equalsIgnoreCase("Ja")) {
+                fundetAftale.erBetalt = true;
+            } else {
+                fundetAftale.erBetalt = false;
+            }
+
+            System.out.println("Aftalen er blevet opdatere: " + fundetAftale + "\n");
+        } else if (jaEllerNej.equalsIgnoreCase("Nej")) {
+            System.out.println("Du har valgt ikke at redigere denne aftale.");
+        } else {
+            System.out.println("Du skal vælge mellem Ja eller Nej");
+        }
+    }
     void registrerBetaling(Aftale fundetAftale) {
         int op1;
         int op2;
@@ -125,7 +191,6 @@ public class Revision {
                     fundetAftale.totalBelob = fundetAftale.totalBelob + op3;
                 }
                 System.out.println("Totalbeløb for ordre er: " + fundetAftale.totalBelob);
-                break;
             } else if (op1 == 2) {
                 fundetAftale.totalBelob = 400;
                 System.out.println("ekstra omkostninger?" + "\n" + "1. ja." + "\n" + "2. nej.");
@@ -136,7 +201,6 @@ public class Revision {
                     fundetAftale.totalBelob = fundetAftale.totalBelob + op3;
                 }
                 System.out.println("Totalbeløb for ordre er: " + fundetAftale.totalBelob);
-                break;
             } else if (op1 == 3) {
                 fundetAftale.totalBelob = -200;
                 System.out.println("ekstra omkostninger?" + "\n" + "1. ja." + "\n" + "2. nej.");
