@@ -21,7 +21,8 @@ import java.util.Scanner;
                 System.out.println("4. Søg efter aftaleID");
                 System.out.println("5. Print alle aftaler");
                 System.out.println("6. Fjern aftale");
-                System.out.println("Tast 9 for at afslutte");
+                System.out.println("7. Meld lukkedag");
+                System.out.println("0. For at afslutte");
 
                 try {
                     tast = menutast.nextInt();
@@ -69,7 +70,10 @@ import java.util.Scanner;
                             System.out.println(startCalender.findSpecificAftaleByAftaleID(startCalender.aftaleListe, op1) + "\n");
                             startCalender.fjernOrdre(startCalender.findSpecificAftaleByAftaleID(startCalender.aftaleListe, op1));
                             break;
-                        case 9:
+                        case 7:
+                            startCalender.meldLukkedag();
+                            break;
+                        case 0:
                             System.out.println("Afslut programmet.\n");
                             menutast.close();
                             return; // Afslut metoden og programmet
