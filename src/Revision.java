@@ -5,6 +5,7 @@ public class Revision {
     private Map<LocalDate, List<String>> aftaler;
     private Kalender test1;
     Scanner scanner = new Scanner(System.in);
+    double totalbelobfordag = 0;
 
     public Revision(Kalender salonKalender) {
         aftaler = new HashMap<>();
@@ -34,6 +35,7 @@ public class Revision {
                 switch (op4) {
                     case 1:
                         vaelgDatoOgVisAftaler();
+                        System.out.println("\nTotalbeløb for dag: "+totalbelobfordag+"\n");
                         break;
                     case 2:
                         System.out.println("Indtast aftale-ID: ");
@@ -92,6 +94,7 @@ public class Revision {
 
     public void vaelgDatoOgVisAftaler() {
         boolean gyldigDato = false;
+        totalbelobfordag = 0;
         while (!gyldigDato) {
             System.out.println("Indtast datoen (åååå-mm-dd): ");
             String datoInput = scanner.nextLine();
@@ -107,6 +110,7 @@ public class Revision {
                     for (Aftale aftale : alleAftaler) {
                         if (aftale.dato.isEqual(valgtDato)) {
                             System.out.println(aftale + "\n");
+                            totalbelobfordag = totalbelobfordag + aftale.totalBelob;
                             fundetAftale = true;
                         }
                     }
@@ -125,7 +129,6 @@ public class Revision {
     }
     void redigerBetaling (Aftale fundetAftale) {
         while (true) {
-            System.out.println("Fundet aftale: " + fundetAftale + "\n");
             System.out.println("Vil du redigere denne aftale? (Ja/Nej)");
             String jaEllerNej = scanner.next();
             if (jaEllerNej.equalsIgnoreCase("Ja")) {
@@ -171,7 +174,6 @@ public class Revision {
                                 fundetAftale.totalBelob = fundetAftale.afbetalingAfGaeld * -1;
                                 fundetAftale.erBetalt = true;
                             }
-                            System.out.println("\n" + fundetAftale + "\n");
                             break;
                         } else
                             System.out.println("Indtast venligst et beløb som maksimalt er lig fuld afbetaling.");
@@ -201,7 +203,7 @@ public class Revision {
         int op2;
         double op3;
         System.out.println(fundetAftale);
-        System.out.println("1. Herreklipning. 200kr. " + "\n" + "2. kvindeklipning. 400 kr." + "\n" + "3. Herreklipning+kredit" + "\n" + "4. Kvindeklipning+kredit");
+        System.out.println("\n1. Herreklipning. 200kr. " + "\n" + "2. kvindeklipning. 400 kr." + "\n" + "3. Herreklipning+kredit" + "\n" + "4. Kvindeklipning+kredit");
 
         op1 = scanner.nextInt();
         while (true) {
@@ -215,6 +217,7 @@ public class Revision {
                     fundetAftale.totalBelob = fundetAftale.totalBelob + op3;
                 }
                 System.out.println("Totalbeløb for ordre er: " + fundetAftale.totalBelob);
+                break;
             } else if (op1 == 2) {
                 fundetAftale.totalBelob = 400;
                 System.out.println("Ekstra omkostninger?" + "\n" + "1. ja." + "\n" + "2. nej.");
@@ -225,6 +228,7 @@ public class Revision {
                     fundetAftale.totalBelob = fundetAftale.totalBelob + op3;
                 }
                 System.out.println("Totalbeløb for ordre er: " + fundetAftale.totalBelob);
+                break;
             } else if (op1 == 3) {
                 fundetAftale.totalBelob = -200;
                 fundetAftale.afbetalingAfGaeld = fundetAftale.totalBelob;
@@ -237,12 +241,12 @@ public class Revision {
                     fundetAftale.erBetalt = false;
                     fundetAftale.betalingsmetode = "Kredit";
                     fundetAftale.afbetalingAfGaeld = fundetAftale.totalBelob;
-                    System.out.println("Skylder " + fundetAftale.totalBelob + "kr.\n");
+                    System.out.println("\nManglende betaling: " + fundetAftale.totalBelob + "kr.\n");
                     break;
                 } else {
                     fundetAftale.betalingsmetode = "Kredit";
                     fundetAftale.afbetalingAfGaeld = fundetAftale.totalBelob;
-                    System.out.println("Skylder " + fundetAftale.totalBelob + "kr.\n");
+                    System.out.println("\nManglende betaling: " + fundetAftale.totalBelob + "kr.\n");
                     break;
                 }
             } else if (op1 == 4) {
@@ -257,12 +261,12 @@ public class Revision {
                     fundetAftale.erBetalt = false;
                     fundetAftale.betalingsmetode = "Kredit";
                     fundetAftale.afbetalingAfGaeld = fundetAftale.totalBelob;
-                    System.out.println("Skylder " + fundetAftale.totalBelob + "kr.\n");
+                    System.out.println("\nManglende betaling: " + fundetAftale.totalBelob + "kr.\n");
                     break;
                 } else {
                     fundetAftale.betalingsmetode = "Kredit";
                     fundetAftale.afbetalingAfGaeld = fundetAftale.totalBelob;
-                    System.out.println("Skylder " + fundetAftale.totalBelob + "kr.\n");
+                    System.out.println("\nManglende betaling: " + fundetAftale.totalBelob + "kr.\n");
                     break;
                 }
             } else {
