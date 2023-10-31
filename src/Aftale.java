@@ -10,6 +10,7 @@ public class Aftale {
     String betalingsstatus;
     String betalingsmetode = "";
     double totalBelob;
+    double afbetalingAfGaeld = 0;
 
     Aftale(LocalDate dato, String tidspunkt, String kundenavn) {
         aftaleIDcounter++;
