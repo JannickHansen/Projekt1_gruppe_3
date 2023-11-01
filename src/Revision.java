@@ -20,52 +20,6 @@ public class Revision {
         }
     }
 
-    void hovedmenu() {
-        while (true) {
-            int op4 = 9;
-            System.out.println("0. For afslut");
-            System.out.println("1. For at søge på dato");
-            System.out.println("2. For at søge på aftaleID");
-            System.out.println("3. For at søge efter navn");
-            System.out.println("4. For at registrere betaling");
-            System.out.println("5. For at redigere betaling");
-            op4 = scanner.nextInt();
-            try {
-                if (op4 == 0) break;
-                switch (op4) {
-                    case 1:
-                        vaelgDatoOgVisAftaler();
-                        System.out.println("\nTotalbeløb for dag: "+totalbelobfordag+"\n");
-                        break;
-                    case 2:
-                        System.out.println("Indtast aftale-ID: ");
-                        int søgeAftaleID = scanner.nextInt();
-                        findSpecificAftaleByAftaleID(kalender.aftaleListe, søgeAftaleID);
-                        break;
-                    case 3:
-                        System.out.println("Indtast navn: ");
-                        String søgEfterNavn = scanner.next();
-                        findSpecificAftaleByName(kalender.aftaleListe, søgEfterNavn);
-                        break;
-                    case 4:
-                        System.out.println("Indtast aftale-ID: ");
-                        søgeAftaleID = scanner.nextInt();
-                        registrerBetaling(findSpecificAftaleByAftaleID(kalender.aftaleListe, søgeAftaleID));
-                        break;
-                    case 5:
-                        System.out.println("Indtast aftle-ID: ");
-                        søgeAftaleID = scanner.nextInt();
-                        redigerBetaling(findSpecificAftaleByAftaleID(kalender.aftaleListe, søgeAftaleID));
-                        break;
-                    default:
-                }
-            } catch (InputMismatchException Ie) {
-                System.out.println("Du skal bruge et tal for at komme videre, prøv igen!");
-                scanner.next();
-            }
-        }
-    }
-
     public Aftale findSpecificAftaleByAftaleID(List<Aftale> aftaleListe, int aftaleID) {
         List<Aftale> alleAftaler = aftaleListe;
         for (Aftale aftale : aftaleListe) {
@@ -122,8 +76,8 @@ public class Revision {
                 }
 
                 gyldigDato = true;
-            } catch (Exception e) {
-                System.out.println("Ugyldigt datoformat. Brug formatet ååå-mm-dd.");
+            } catch (Exception DateTimeParseException) {
+                System.out.println("Ugyldigt datoformat. Brug formatet åååå-mm-dd.");
             }
         }
     }
@@ -131,6 +85,7 @@ public class Revision {
         while (true) {
             System.out.println("Vil du redigere denne aftale? (Ja/Nej)");
             String jaEllerNej = scanner.next();
+            jaEllerNej = spellingControl(jaEllerNej);
             if (jaEllerNej.equalsIgnoreCase("Ja")) {
                 System.out.println("Vil du ændre betalingsmetode? (Ja/Nej) ");
                 String editPayment = scanner.next();
@@ -182,6 +137,7 @@ public class Revision {
                 if (!fundetAftale.erBetalt) {
                     System.out.println("Er betalingen gennemført? (Ja/Nej)");
                     String paymentStatus = scanner.next();
+                    paymentStatus = spellingControl(paymentStatus);
                     if (paymentStatus.equalsIgnoreCase("Ja")) {
                         fundetAftale.erBetalt = true;
                     } else {
@@ -202,11 +158,12 @@ public class Revision {
         int op1;
         int op2;
         double op3;
-        System.out.println(fundetAftale);
         System.out.println("\n1. Herreklipning. 200kr. " + "\n" + "2. kvindeklipning. 400 kr." + "\n" + "3. Herreklipning+kredit" + "\n" + "4. Kvindeklipning+kredit");
 
         op1 = scanner.nextInt();
         while (true) {
+            if (op1 == 0)
+                break;
             if (op1 == 1) {
                 fundetAftale.totalBelob = 200;
                 System.out.println("Ekstra omkostninger?" + "\n" + "1. ja. " + "\n" + "2. nej.");
@@ -305,6 +262,11 @@ public class Revision {
                 }
                 }
             }
+    public String spellingControl(String str) {
+        if (str == null || str.isEmpty()) return str;
+        String lowerCaseStr = str.toLowerCase();
+        return lowerCaseStr.substring(0, 1).toUpperCase() + lowerCaseStr.substring(1);
+    }
     public static void main(String[] args) {
         Kalender salonKalender = new Kalender();
         Revision revision = new Revision(salonKalender);

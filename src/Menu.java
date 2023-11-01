@@ -67,6 +67,7 @@ import java.util.Scanner;
                             break;
                         case 6:
                             System.out.println("Fjern aftale");
+                            System.out.print("Indtast AftaleID: ");
                             op1 = menutast.nextInt();
                             System.out.println(startCalender.findSpecificAftaleByAftaleID(startCalender.aftaleListe, op1) + "\n");
                             startCalender.fjernOrdre(startCalender.findSpecificAftaleByAftaleID(startCalender.aftaleListe, op1));
