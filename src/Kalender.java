@@ -263,7 +263,7 @@ class Kalender {
         System.out.println("Indtast lukkedatoen (åååå-mm-dd): ");
         System.out.println("Tryk 0 for at gå tilbage ");
         boolean gyldigDato = false;
-        char ferie=' ';
+        String ferie = " ";
         while (!gyldigDato) {
             String datoInput = tastatur.nextLine();
             try {
@@ -277,12 +277,12 @@ class Kalender {
                     continue;
                 }
                 if (isFerieEqualsAftale(valgtDato)) {
-                    System.out.println("denne dag har allerede aftaler booket");
-                    System.out.println("vil du stadig lukke dato? y/n");
+                    System.out.println("Denne dag har allerede aftaler booket");
+                    System.out.println("Vil du stadig lukke dato? (Ja/Nej)");
                     while (true) {
-                        ferie = tastatur.next().charAt(0);
-                        tastatur.nextLine();
-                        if (ferie == 'y') {
+                        ferie = tastatur.next();
+                        ferie = spellingControl(ferie);
+                        if (ferie.equalsIgnoreCase("Ja")) {
                             Iterator<Aftale> iterator = aftaleListe.iterator();
                             while (iterator.hasNext()) {
                                 Aftale aftale = iterator.next();
@@ -292,14 +292,14 @@ class Kalender {
                                 }
                             }
                             break;
-                        } else if (ferie == 'n') {
+                        } else if (ferie.equalsIgnoreCase("Nej")) {
                             break;
                         } else {
-                            System.out.println("Du kan enten taste y eller n");
+                            System.out.println("Du kan enten skrive Ja eller Nej. Prøv igen");
                         }
                     }
                 }
-                if (ferie=='y' || !isFerieEqualsAftale(valgtDato)){
+                if (ferie.equalsIgnoreCase("Ja") || !isFerieEqualsAftale(valgtDato)){
                     ferieDage.add(valgtDato);
                     System.out.println(valgtDato + " er nu lukket");
                     break;

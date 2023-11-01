@@ -87,33 +87,42 @@ public class Revision {
             String jaEllerNej = scanner.next();
             jaEllerNej = spellingControl(jaEllerNej);
             if (jaEllerNej.equalsIgnoreCase("Ja")) {
+                while (true) {
                 System.out.println("Vil du ændre betalingsmetode? (Ja/Nej) ");
                 String editPayment = scanner.next();
-                if (editPayment.equalsIgnoreCase("Ja")) {
-                    while (true) {
-                        System.out.println("Vælg betalingsmetode: ");
-                        System.out.println("1. Kontant ");
-                        System.out.println("2. MobilePay ");
-                        System.out.println("3. Kort ");
-                        System.out.println("4. Ubetalt ");
-                        int op1 = scanner.nextInt();
-                        switch (op1) {
-                            case 1:
-                                fundetAftale.betalingsmetode = "Kontant";
-                                break;
-                            case 2:
-                                fundetAftale.betalingsmetode = "MobilePay";
-                                break;
-                            case 3:
-                                fundetAftale.betalingsmetode = "Kort";
-                                break;
-                            case 4:
-                                fundetAftale.betalingsmetode = "Ubetalt";
-                                break;
-                            default:
-                                System.out.println("Ugyldigt input.");
+                editPayment =spellingControl(editPayment);
+
+                        if (editPayment.equalsIgnoreCase("Ja")) {
+                            System.out.println("Vælg betalingsmetode: ");
+                            System.out.println("1. Kontant ");
+                            System.out.println("2. MobilePay ");
+                            System.out.println("3. Kort ");
+                            System.out.println("4. Ubetalt ");
+                            int op1 = scanner.nextInt();
+                            switch (op1) {
+                                case 1:
+                                    fundetAftale.betalingsmetode = "Kontant";
+                                    break;
+                                case 2:
+                                    fundetAftale.betalingsmetode = "MobilePay";
+                                    break;
+                                case 3:
+                                    fundetAftale.betalingsmetode = "Kort";
+                                    break;
+                                case 4:
+                                    fundetAftale.betalingsmetode = "Ubetalt";
+                                    break;
+                                default:
+                                    System.out.println("Ugyldigt input.");
+                            }
+                            break;
                         }
-                        break;
+                        else if (editPayment.equalsIgnoreCase("Nej")) {
+                            break;
+                        }
+                        else {
+                            System.out.println("Du skal vælge mellem Ja eller Nej");
+
                     }
                 }
                 System.out.println("Afbetaling af Kredit? (Ja/Nej)");
