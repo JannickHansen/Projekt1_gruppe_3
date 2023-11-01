@@ -19,8 +19,6 @@ class Kalender {
 
 
     void mainMenu() {
-        Aftale testaftale = new Aftale(LocalDate.of(2023,10,16),"11:00 - 12:00","John");
-        aftaleListe.add(testaftale);
         List<LocalDate> selectedWeek;
 
         while (true) {
@@ -114,9 +112,10 @@ class Kalender {
                 System.out.println(getGreen + i + ". " + timeSlot + resetColour);
             }
         }
-        System.out.print("Vælg venligst tidspunkt:");
+        System.out.print("Vælg venligst tidspunkt (1 - 8) :");
         while (true) {
             int op3 = tryCatchInput();
+            if (op3 == 0) break;
             if (op3 > 0 && op3 < 9) {
                 String selectedTimeSlot = convertIntTimetoStringTime.getOrDefault(op3, "");
 
@@ -266,7 +265,7 @@ class Kalender {
         boolean gyldigDato = false;
         String ferie = " ";
         while (!gyldigDato) {
-            String datoInput = tastatur.nextLine();
+            String datoInput = tastatur.next();
             try {
                 if (datoInput.equals("0"))
                     break;
@@ -306,7 +305,7 @@ class Kalender {
                     break;
                 }
 
-            } catch (Exception e) {
+            } catch (Exception DateTimeParseException) {
                 System.out.println("Ugyldigt datoformat. Brug formatet åååå-mm-dd.");
             }
         }

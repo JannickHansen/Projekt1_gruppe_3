@@ -93,7 +93,7 @@ public class Revision {
                 editPayment =spellingControl(editPayment);
 
                         if (editPayment.equalsIgnoreCase("Ja")) {
-                            System.out.println("Vælg betalingsmetode: ");
+                            System.out.println("\nVælg betalingsmetode: \n");
                             System.out.println("1. Kontant ");
                             System.out.println("2. MobilePay ");
                             System.out.println("3. Kort ");
@@ -258,8 +258,6 @@ public class Revision {
                 }
                 } else {
                 System.out.println("vælge 1, 2, 3 eller 4");
-
-
             }
         }
         if (op1 == 1 || op1 == 2) {
@@ -270,22 +268,22 @@ public class Revision {
                 if (op1 == 1) {
                     fundetAftale.erBetalt = true;
                     fundetAftale.betalingsmetode = "Kontant";
-                    System.out.println("Betalt via Kontant\nBeløbet er: " + fundetAftale.totalBelob + "kr.");
+                    System.out.println("\nBetalt via Kontant\nBeløbet er: " + fundetAftale.totalBelob + "kr.\n");
                     break;
                 } else if (op1 == 2) {
                     fundetAftale.erBetalt = true;
                     fundetAftale.betalingsmetode = "Mobilepay";
-                    System.out.println("Betalt via MobilePay\nBeløbet er: " + fundetAftale.totalBelob + "kr.");
+                    System.out.println("\nBetalt via MobilePay\nBeløbet er: " + fundetAftale.totalBelob + "kr.\n");
                     break;
                 } else if (op1 == 3) {
                     fundetAftale.erBetalt = true;
                     fundetAftale.betalingsmetode = "Kort";
-                    System.out.println("Betalt via Kort\nBeløbet er: " + fundetAftale.totalBelob + "kr.");
+                    System.out.println("\nBetalt via Kort\nBeløbet er: " + fundetAftale.totalBelob + "kr.\n");
                     break;
                 } else if (op1 == 4) {
                     fundetAftale.erBetalt = false;
                     fundetAftale.betalingsmetode = "Ubetalt";
-                    System.out.println("Betaling ikke gennemført, Skylder: " + fundetAftale.totalBelob + "kr.");
+                    System.out.println("\nBetaling ikke gennemført, Skylder: " + fundetAftale.totalBelob + "kr.\n");
                     break;
                 } else {
                     System.out.println("Du skal vælge mellem de pågældne tal der står for oven...");

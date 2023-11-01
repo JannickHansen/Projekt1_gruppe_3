@@ -58,13 +58,15 @@ public class Menu {
                         startCalender.findSpecificAftaleByAftaleID(startCalender.aftaleListe, op1);
                         break;
                     case 5:
-                        System.out.println("Print alle aftaler.\n");
-                        startCalender.aftaleListe.sort(Comparator.comparing(aftale -> aftale.dato));
-                        System.out.println("Alle aftaler efter dato:");
-                        for (Aftale aftale : startCalender.aftaleListe) {
-                            System.out.println("\nDato: "+aftale.dato+"\nTidspunkt: "+aftale.tidspunkt+"\nKundenavn: "+aftale.kundenavn+"\nAftale nr: "+aftale.aftaleID+"\n");
-                        }
-                        break;
+                        System.out.println("Printer alle aftaler.\n");
+                        if (!startCalender.aftaleListe.isEmpty()) {
+                            startCalender.aftaleListe.sort(Comparator.comparing(aftale -> aftale.dato));
+                            System.out.println("Alle aftaler efter dato:");
+                            for (Aftale aftale : startCalender.aftaleListe) {
+                                System.out.println("\nDato: " + aftale.dato + "\nTidspunkt: " + aftale.tidspunkt + "\nKundenavn: " + aftale.kundenavn + "\nAftale nr: " + aftale.aftaleID + "\n");
+                            }
+                            break;
+                        } else { System.out.println("Der er nuværende ingen aftaler."); break; }
                     case 6:
                         System.out.println("Fjern aftale");
                         System.out.print("Indtast AftaleID: ");
@@ -83,7 +85,7 @@ public class Menu {
                     case 0:
                         System.out.println("Afslut programmet.\n");
                         menutast.close();
-                        return; // Afslut metoden og programmet
+                        return;
                     default:
                         System.out.println("Ugyldig valg. Prøv igen.\n");
                 }
@@ -140,6 +142,8 @@ public class Menu {
     }
     public static void main(String[] args) {
         Menu front = new Menu();
+        Aftale testaftale = new Aftale(LocalDate.of(2023,10,16),"11:00 - 12:00","John");
+        front.startCalender.aftaleListe.add(testaftale);
         front.mainMenu();
     }
 }
