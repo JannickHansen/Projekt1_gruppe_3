@@ -231,53 +231,40 @@ public class Revision {
             }
         }
         if (op1 == 1 || op1 == 2) {
-        System.out.println("Gennemførelse af betalling" + "\n" + "hvilken betaling metode ønsker du?");
-                System.out.println("Betallings metode." + "\n" + "1. Kontant." + "\n" + "2. MobilePay" + "\n" + "3. Kort" + "\n" + "4. Ubetalt" + "\n" + "5. kredit");
-                op1 = scanner.nextInt();
-                while (true) {
-                    if (op1 == 1) {
-                        fundetAftale.erBetalt = true;
-                        fundetAftale.betalingsmetode = "Kontant";
-                        System.out.println("Betalt via Kontant\nBeløbet er: " + fundetAftale.totalBelob + "kr.");
-                        break;
-                    } else if (op1 == 2) {
-                        fundetAftale.erBetalt = true;
-                        fundetAftale.betalingsmetode = "Mobilepay";
-                        System.out.println("Betalt via MobilePay\nBeløbet er: " + fundetAftale.totalBelob + "kr.");
-                        break;
-                    } else if (op1 == 3) {
-                        fundetAftale.erBetalt = true;
-                        fundetAftale.betalingsmetode = "Kort";
-                        System.out.println("Betalt via Kort\nBeløbet er: " + fundetAftale.totalBelob + "kr.");
-                        break;
-                    } else if (op1 == 4) {
-                        fundetAftale.erBetalt = false;
-                        fundetAftale.betalingsmetode = "Ubetalt";
-                        System.out.println("Betaling ikke gennemført, Skylder: " + fundetAftale.totalBelob + "kr.");
-                        break;
-                    } else {
-                        System.out.println("Du skal vælge mellem de pågældne tal der står for oven...");
-                    }
+            System.out.println("Gennemførelse af betalling" + "\n" + "hvilken betaling metode ønsker du?");
+            System.out.println("Betallings metode." + "\n" + "1. Kontant." + "\n" + "2. MobilePay" + "\n" + "3. Kort" + "\n" + "4. Ubetalt" + "\n" + "5. kredit");
+            op1 = scanner.nextInt();
+            while (true) {
+                if (op1 == 1) {
+                    fundetAftale.erBetalt = true;
+                    fundetAftale.betalingsmetode = "Kontant";
+                    System.out.println("Betalt via Kontant\nBeløbet er: " + fundetAftale.totalBelob + "kr.");
                     break;
+                } else if (op1 == 2) {
+                    fundetAftale.erBetalt = true;
+                    fundetAftale.betalingsmetode = "Mobilepay";
+                    System.out.println("Betalt via MobilePay\nBeløbet er: " + fundetAftale.totalBelob + "kr.");
+                    break;
+                } else if (op1 == 3) {
+                    fundetAftale.erBetalt = true;
+                    fundetAftale.betalingsmetode = "Kort";
+                    System.out.println("Betalt via Kort\nBeløbet er: " + fundetAftale.totalBelob + "kr.");
+                    break;
+                } else if (op1 == 4) {
+                    fundetAftale.erBetalt = false;
+                    fundetAftale.betalingsmetode = "Ubetalt";
+                    System.out.println("Betaling ikke gennemført, Skylder: " + fundetAftale.totalBelob + "kr.");
+                    break;
+                } else {
+                    System.out.println("Du skal vælge mellem de pågældne tal der står for oven...");
                 }
-                }
+                break;
             }
+        }
+    }
     public String spellingControl(String str) {
         if (str == null || str.isEmpty()) return str;
         String lowerCaseStr = str.toLowerCase();
         return lowerCaseStr.substring(0, 1).toUpperCase() + lowerCaseStr.substring(1);
-    }
-    public static void main(String[] args) {
-        Kalender salonKalender = new Kalender();
-        Revision revision = new Revision(salonKalender);
-
-        LocalDate iGår = LocalDate.now().minusDays(1);
-        revision.tilføjAftale("Aftale fra i går1", iGår);
-        revision.tilføjAftale("Aftale fra i går2", iGår);
-
-        revision.vaelgDatoOgVisAftaler();
-
-        /*int søgAftaleID = scanner.nextInt();
-        revision.søgAftaleID();*/
     }
 }
