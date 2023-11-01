@@ -3,13 +3,13 @@ import java.util.*;
 
 public class Revision {
     private Map<LocalDate, List<String>> aftaler;
-    private Kalender test1;
+    public Kalender kalender;
     Scanner scanner = new Scanner(System.in);
     double totalbelobfordag = 0;
 
     public Revision(Kalender salonKalender) {
         aftaler = new HashMap<>();
-        test1 = salonKalender;
+        kalender = salonKalender;
 
     }
 
@@ -40,22 +40,22 @@ public class Revision {
                     case 2:
                         System.out.println("Indtast aftale-ID: ");
                         int søgeAftaleID = scanner.nextInt();
-                        findSpecificAftaleByAftaleID(test1.aftaleListe, søgeAftaleID);
+                        findSpecificAftaleByAftaleID(kalender.aftaleListe, søgeAftaleID);
                         break;
                     case 3:
                         System.out.println("Indtast navn: ");
                         String søgEfterNavn = scanner.next();
-                        findSpecificAftaleByName(test1.aftaleListe, søgEfterNavn);
+                        findSpecificAftaleByName(kalender.aftaleListe, søgEfterNavn);
                         break;
                     case 4:
                         System.out.println("Indtast aftale-ID: ");
                         søgeAftaleID = scanner.nextInt();
-                        registrerBetaling(findSpecificAftaleByAftaleID(test1.aftaleListe, søgeAftaleID));
+                        registrerBetaling(findSpecificAftaleByAftaleID(kalender.aftaleListe, søgeAftaleID));
                         break;
                     case 5:
                         System.out.println("Indtast aftle-ID: ");
                         søgeAftaleID = scanner.nextInt();
-                        redigerBetaling(findSpecificAftaleByAftaleID(test1.aftaleListe, søgeAftaleID));
+                        redigerBetaling(findSpecificAftaleByAftaleID(kalender.aftaleListe, søgeAftaleID));
                         break;
                     default:
                 }
@@ -102,7 +102,7 @@ public class Revision {
             try {
                 LocalDate valgtDato = LocalDate.parse(datoInput);
 
-                List<Aftale> alleAftaler = test1.aftaleListe;
+                List<Aftale> alleAftaler = kalender.aftaleListe;
 
                 if (alleAftaler != null) {
                     System.out.println("Aftaler på valgt dato (" + valgtDato + "):");

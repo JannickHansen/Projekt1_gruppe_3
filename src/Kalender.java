@@ -18,6 +18,8 @@ class Kalender {
 
 
     void mainMenu() {
+        Aftale testaftale = new Aftale(LocalDate.of(2023,10,16),"11:00 - 12:00","John");
+        aftaleListe.add(testaftale);
         List<LocalDate> selectedWeek;
 
         while (true) {
@@ -54,6 +56,9 @@ class Kalender {
                 System.out.println("\nDer er højest 53 uger på et år. Vælg venligst en gyldig uge.\n");
             } else {
                 selectedWeek = selectedWeek(op1, getWeekNumber(0));
+                if (selectedWeek == null) {
+                    System.out.println("\nVælg venligst en uge mellem den nuværende og frem.");
+                } else {
                 selectedWeekPrint(op1, getWeekNumber(0));
                 System.out.println("\nTryk 0 for at gå tilbage");
 
@@ -66,6 +71,7 @@ class Kalender {
                 op2 = spellingControl(op2);
                 if (isValidWeekday(op2)) {
                     opretAftale(selectedWeek);
+                }
                 }
             }
         }
@@ -175,8 +181,8 @@ class Kalender {
     List<LocalDate> selectedWeekPrint(int wantedWeek, int currentWeek) {
         int n = Math.abs(wantedWeek - currentWeek);
         List<LocalDate> weekDates = getWeek(n);
-        System.out.println("Ugedag:   Mandag\t  Tirsdag\t  Onsdag\t  Torsdag\t  Fredag");
-        System.out.print("Uge nr: ");
+        System.out.println("\nUgedag: \t  Mandag\t  Tirsdag\t  Onsdag\t  Torsdag\t  Fredag");
+        System.out.print("Uge nr: "+wantedWeek+"\t");
         System.out.print(getGreen + weekDates.get(0) + resetColour + "\t");
 
         for (int i = 1; i < 5; i++) {
@@ -190,8 +196,11 @@ class Kalender {
         return weekDates;
     }
     List<LocalDate> selectedWeek(int wantedWeek, int currentWeek) {
-        int i = Math.abs(wantedWeek - currentWeek);
-        return getWeek(i);
+        if (wantedWeek >= currentWeek) {
+            int i = Math.abs(wantedWeek - currentWeek);
+            return getWeek(i);
+        }
+        else return null;
     }
 
     public int getWeekNumber(int weeksInFuture) {
