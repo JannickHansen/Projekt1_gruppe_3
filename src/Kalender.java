@@ -54,23 +54,6 @@ class Kalender {
 
             if (op1 == 0) {
                 break;
-            } else if (op1 == 97) {
-                System.out.print("Indtast kundenavn:");
-                op2 = tastatur.next();
-                for (Aftale aftale : findSpecificAftaleByName(aftaleListe, op2)) {
-                    System.out.println(aftale + "\n");
-                }
-            } else if (op1 == 98) {
-                System.out.print("Indtast aftaleID:");
-                op1 = tastatur.nextInt();
-                System.out.println(findSpecificAftaleByAftaleID(aftaleListe, op1) + "\n");
-                fjernOrdre(findSpecificAftaleByAftaleID(aftaleListe, op1));
-            } else if (op1 == 99) {
-                aftaleListe.sort(Comparator.comparing(aftale -> aftale.dato));
-                System.out.println("Alle aftaler efter dato:");
-                for (Aftale aftale : aftaleListe) {
-                    System.out.println(aftale + "\n");
-                }
             }else if (op1 == 100) {
                 System.out.println("Indtast lukkedatoen (åååå-mm-dd): ");
                 System.out.println("Tryk 0 for at gå tilbage ");
