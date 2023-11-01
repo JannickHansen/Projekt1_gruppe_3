@@ -165,42 +165,57 @@ public class Revision {
     }
     void registrerBetaling(Aftale fundetAftale) {
         int op1;
-        int op2;
         double op3;
-        System.out.println("\n1. Herreklipning. 200kr. " + "\n" + "2. kvindeklipning. 400 kr." + "\n" + "3. Herreklipning+kredit" + "\n" + "4. Kvindeklipning+kredit");
+        while (true) {
+        System.out.println("\n1. Herreklipning. 200kr. " + "\n" + "2. kvindeklipning. 400 kr." + "\n" + "3. Herreklipning+kredit" + "\n" + "4. Kvindeklipning+kredit"+"\n"+"0. Retuner til menu");
 
         op1 = scanner.nextInt();
-        while (true) {
             if (op1 == 0)
                 break;
-            if (op1 == 1) {
+            else if (op1 == 1) {
                 fundetAftale.totalBelob = 200;
-                System.out.println("Ekstra omkostninger?" + "\n" + "1. ja. " + "\n" + "2. nej.");
-                op2 = scanner.nextInt();
-                if (op2 == 1) {
+                System.out.println("Ekstra omkostninger?" + " (Ja/Nej)");
+                String jaellernej = scanner.next();
+                jaellernej=spellingControl(jaellernej);
+
+                if (jaellernej.equals("Ja")) {
                     System.out.println("Total beløb for omkostninger. (XX,XX): ");
                     op3 = scanner.nextDouble();
                     fundetAftale.totalBelob = fundetAftale.totalBelob + op3;
+                    break;
+                } else if(jaellernej.equals("Nej")){
+                    break;
+                } else{
+                    System.out.println("Du skal vælge mellem Ja eller Nej");
                 }
                 System.out.println("Totalbeløb for ordre er: " + fundetAftale.totalBelob);
                 break;
             } else if (op1 == 2) {
                 fundetAftale.totalBelob = 400;
-                System.out.println("Ekstra omkostninger?" + "\n" + "1. ja." + "\n" + "2. nej.");
-                op2 = scanner.nextInt();
-                if (op2 == 1) {
+                System.out.println("Ekstra omkostninger?" + " (Ja/Nej)");
+                String jaellernej = scanner.next();
+                jaellernej=spellingControl(jaellernej);
+
+                if (jaellernej.equals("Ja")) {
                     System.out.println("Total beløb for omkostninger. (XX,XX): ");
                     op3 = scanner.nextDouble();
                     fundetAftale.totalBelob = fundetAftale.totalBelob + op3;
+                    break;
+                } else if(jaellernej.equals("Nej")){
+                    break;
+                } else{
+                    System.out.println("Du skal vælge mellem Ja eller Nej");
                 }
                 System.out.println("Totalbeløb for ordre er: " + fundetAftale.totalBelob);
                 break;
             } else if (op1 == 3) {
                 fundetAftale.totalBelob = -200;
                 fundetAftale.afbetalingAfGaeld = fundetAftale.totalBelob;
-                System.out.println("Ekstra omkostninger?" + "\n" + "1. ja." + "\n" + "2. nej.");
-                op2 = scanner.nextInt();
-                if (op2 == 1) {
+                System.out.println("Ekstra omkostninger?" + " (Ja/Nej)");
+                String jaellernej = scanner.next();
+                jaellernej=spellingControl(jaellernej);
+
+                if (jaellernej.equals("Ja")) {
                     System.out.println("Total beløb for omkostninger. (XX,XX): ");
                     op3 = scanner.nextDouble();
                     fundetAftale.totalBelob = fundetAftale.totalBelob + -op3;
@@ -209,18 +224,22 @@ public class Revision {
                     fundetAftale.afbetalingAfGaeld = fundetAftale.totalBelob;
                     System.out.println("\nManglende betaling: " + fundetAftale.totalBelob + "kr.\n");
                     break;
-                } else {
+                } else if(jaellernej.equals("Nej")){
                     fundetAftale.betalingsmetode = "Kredit";
                     fundetAftale.afbetalingAfGaeld = fundetAftale.totalBelob;
                     System.out.println("\nManglende betaling: " + fundetAftale.totalBelob + "kr.\n");
                     break;
+                } else {
+                    System.out.println("Du skal vælge mellem Ja eller Nej");
                 }
             } else if (op1 == 4) {
                 fundetAftale.totalBelob = -400;
                 fundetAftale.afbetalingAfGaeld = fundetAftale.totalBelob;
-                System.out.println("Ekstra omkostninger?" + "\n" + "1. ja." + "\n" + "2. nej.");
-                op2 = scanner.nextInt();
-                if (op2 == 1) {
+                System.out.println("Ekstra omkostninger?" + " (Ja/Nej)");
+                String jaellernej = scanner.next();
+                jaellernej = spellingControl(jaellernej);
+
+                if (jaellernej.equals("Ja")) {
                     System.out.println("Total beløb for omkostninger. (XX,XX): ");
                     op3 = scanner.nextDouble();
                     fundetAftale.totalBelob = fundetAftale.totalBelob + -op3;
@@ -229,19 +248,23 @@ public class Revision {
                     fundetAftale.afbetalingAfGaeld = fundetAftale.totalBelob;
                     System.out.println("\nManglende betaling: " + fundetAftale.totalBelob + "kr.\n");
                     break;
-                } else {
+                } else if (jaellernej.equals("Nej")) {
                     fundetAftale.betalingsmetode = "Kredit";
                     fundetAftale.afbetalingAfGaeld = fundetAftale.totalBelob;
                     System.out.println("\nManglende betaling: " + fundetAftale.totalBelob + "kr.\n");
                     break;
+                } else {
+                    System.out.println("Du skal vælge mellem Ja eller Nej");
                 }
-            } else {
+                } else {
                 System.out.println("vælge 1, 2, 3 eller 4");
+
+
             }
         }
         if (op1 == 1 || op1 == 2) {
             System.out.println("Gennemførelse af betalling" + "\n" + "hvilken betaling metode ønsker du?");
-            System.out.println("Betallings metode." + "\n" + "1. Kontant." + "\n" + "2. MobilePay" + "\n" + "3. Kort" + "\n" + "4. Ubetalt" + "\n" + "5. kredit");
+            System.out.println("Betallings metode." + "\n" + "1. Kontant." + "\n" + "2. MobilePay" + "\n" + "3. Kort" + "\n" + "4. Ubetalt");
             op1 = scanner.nextInt();
             while (true) {
                 if (op1 == 1) {

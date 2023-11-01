@@ -5,6 +5,7 @@ import java.time.temporal.WeekFields;
 import java.util.*;
 
 class Kalender {
+
     Scanner tastatur = new Scanner(System.in);
     List<Aftale> aftaleListe = new ArrayList<>();
     String op2;

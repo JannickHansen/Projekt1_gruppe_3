@@ -133,7 +133,7 @@ public class Menu {
                     default:
                 }
             } catch (InputMismatchException Ie) {
-                System.out.println("Du skal bruge et tal for at komme videre, prøv igen!");
+                System.out.println("Du skal vælge en gyldig valg mulighed!");
                 menutast.next();
             }
         }
