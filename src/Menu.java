@@ -68,7 +68,12 @@ public class Menu {
                     case 6:
                         System.out.println("Fjern aftale");
                         System.out.print("Indtast AftaleID: ");
+                        System.out.println("Tast 0 for at gå tilbage");
                         op1 = menutast.nextInt();
+                        if (op1==0){
+                            break;
+                        }
+                        else
                         System.out.println(startCalender.findSpecificAftaleByAftaleID(startCalender.aftaleListe, op1) + "\n");
                         startCalender.fjernOrdre(startCalender.findSpecificAftaleByAftaleID(startCalender.aftaleListe, op1));
                         break;
@@ -121,7 +126,7 @@ public class Menu {
                         startRevision.registrerBetaling(startRevision.findSpecificAftaleByAftaleID(startRevision.kalender.aftaleListe, søgeAftaleID));
                         break;
                     case 5:
-                        System.out.println("Indtast aftle-ID: ");
+                        System.out.println("Indtast aftale-ID: ");
                         søgeAftaleID = menutast.nextInt();
                         startRevision.redigerBetaling(startRevision.findSpecificAftaleByAftaleID(startRevision.kalender.aftaleListe, søgeAftaleID));
                         break;
