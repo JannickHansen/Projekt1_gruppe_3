@@ -59,19 +59,19 @@ class Kalender {
                 if (selectedWeek == null) {
                     System.out.println("\nVælg venligst en uge mellem den nuværende og frem.");
                 } else {
-                selectedWeekPrint(op1, getWeekNumber(0));
-                System.out.println("\nTryk 0 for at gå tilbage");
+                    selectedWeekPrint(op1, getWeekNumber(0));
+                    System.out.println("\nTryk 0 for at gå tilbage");
 
-                System.out.print(isDayFullyBooked(selectedWeek.get(0)) ? getRed : getGreen);
-                System.out.print(resetColour);
+                    System.out.print(isDayFullyBooked(selectedWeek.get(0)) ? getRed : getGreen);
+                    System.out.print(resetColour);
 
-                System.out.print("Skriv ugedagen hvor aftalen skal oprettes:");
-                op2 = " ";
-                op2 = tastatur.next();
-                op2 = spellingControl(op2);
-                if (isValidWeekday(op2)) {
-                    opretAftale(selectedWeek);
-                }
+                    System.out.print("Skriv ugedagen hvor aftalen skal oprettes:");
+                    op2 = " ";
+                    op2 = tastatur.next();
+                    op2 = spellingControl(op2);
+                    if (isValidWeekday(op2)) {
+                        opretAftale(selectedWeek);
+                    }
                 }
             }
         }
